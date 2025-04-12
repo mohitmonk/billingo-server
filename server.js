@@ -1,9 +1,17 @@
 const express = require('express');
 const twilio = require('twilio');
 require('dotenv').config();
+const cors = require('cors');
 
 const app = express();
 app.use(express.json());
+
+// Enable CORS for your frontend origin
+app.use(cors({
+  origin: 'https://billingo-47713.web.app', // Allow your Firebase Hosting URL
+  methods: ['GET', 'POST', 'OPTIONS'], // Allow specific methods
+  allowedHeaders: ['Content-Type'], // Allow specific headers
+}));
 
 const accountSid = process.env.TWILIO_ACCOUNT_SID;
 const authToken = process.env.TWILIO_AUTH_TOKEN;
